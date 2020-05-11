@@ -32,14 +32,15 @@ public class MainActivity extends AppCompatActivity {
         crearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, CrearConta.class);
+                startActivity(intent);
             }
         });
 
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                System.exit(0);
             }
         });
     }
