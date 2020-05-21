@@ -10,7 +10,6 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private Button loginbtn;
-    private Button crearBtn;
     private Button exitBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,21 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         loginbtn = (Button) findViewById(R.id.Loginbtn);
-        crearBtn = (Button) findViewById(R.id.Createbtn);
         exitBtn = (Button) findViewById(R.id.Exitbtn);
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginMain.class);
-                startActivity(intent);
-            }
-        });
-
-        crearBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CrearConta.class);
                 startActivity(intent);
             }
         });

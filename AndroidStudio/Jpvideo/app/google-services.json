@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "248407710363",
+    "firebase_url": "https://jpvideo-145e0.firebaseio.com",
+    "project_id": "jpvideo-145e0",
+    "storage_bucket": "jpvideo-145e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248407710363:android:1037e3746a45969ec9843e",
+        "android_client_info": {
+          "package_name": "com.example.battletap1.jpvideo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248407710363-aovbp149p4ssnkt12b963oc9ofu1t7u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0w-Suu5UhAvp2Wvf4RQgq9fcaXMNK2eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248407710363-aovbp149p4ssnkt12b963oc9ofu1t7u9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
