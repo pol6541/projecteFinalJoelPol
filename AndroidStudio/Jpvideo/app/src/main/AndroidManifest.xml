@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.battletap1.jpvideo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VideosList"></activity>
+        <activity android:name=".VideoChat"></activity>
+        <activity android:name=".VideosList" />
         <activity android:name=".LoginMain" />
         <activity android:name=".CrearConta" />
         <activity android:name=".MainActivity">
@@ -20,5 +23,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

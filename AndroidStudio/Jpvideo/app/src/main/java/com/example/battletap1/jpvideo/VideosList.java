@@ -4,14 +4,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class VideosList extends AppCompatActivity {
     FloatingActionButton ftb;
+    EditText textName;
+    EditText textLink;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,24 +33,40 @@ public class VideosList extends AppCompatActivity {
     }
 
     private void mostrarDialeg() {
-        /*new AlertDialog.Builder(this)
-                .setView(getLayoutInflater().inflate(R.layout.dialog_create, null))
-                .show();*/
+        AlertDialog.Builder builder = new AlertDialog.Builder(VideosList.this);
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        new AlertDialog.Builder(this).setView(getLayoutInflater().inflate(R.layout.dialog_create, null))
-                // Add action buttons
-                .setPositiveButton("save" , new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
-                    }
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+        // Get the layout inflater
+        LayoutInflater inflater = VideosList.this.getLayoutInflater();
+        View mView = inflater.inflate(R.layout.dialog_create, null);
 
-                    }
-                }).show();
+        textName = (EditText) mView.findViewById(R.id.Name);
+        textLink = (EditText) mView.findViewById(R.id.Link);
+
+        builder.setView(mView)
+                .setPositiveButton("OKAY",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                String link = textLink.getText().toString();
+                                System.out.println(link);
+                                Intent intent = new Intent(VideosList.this, VideoChat.class);
+                                intent.putExtra("link", link);
+                                startActivity(intent);
+
+
+                            }
+                        })
+                .setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
+
 }
