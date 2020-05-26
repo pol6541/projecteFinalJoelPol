@@ -54,7 +54,7 @@ public class VideoChat extends YouTubeBaseActivity {
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
                 FirebaseDatabase.getInstance()
-                        .getReference()
+                        .getReference("Missatges")
                         .push()
                         .setValue(new ChatMessage(input.getText().toString(),
                                 FirebaseAuth.getInstance()
@@ -97,7 +97,7 @@ public class VideoChat extends YouTubeBaseActivity {
         ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
 
         adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class,
-                R.layout.message, FirebaseDatabase.getInstance().getReference()) {
+                R.layout.message, FirebaseDatabase.getInstance().getReference("Missatges")) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 // Get references to the views of message.xml
