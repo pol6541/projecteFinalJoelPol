@@ -38,9 +38,10 @@ public class VideoChat extends YouTubeBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_chat);
+
+
+
         displayChatMessages();
-
-
 
         FloatingActionButton fab =
                 (FloatingActionButton)findViewById(R.id.fab);
