@@ -32,5 +32,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:9.0.0'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
-    implementation files('D:/Documentos/Classe/2 DAM/Projecte Final/projecteFinalJoelPol/AndroidStudio/Jpvideo/postgresql-42.2.12/YouTubeAndroidPlayerApi.jar')
+    implementation files('D:\\projecteFinalJoelPol\\AndroidStudio\\Jpvideo\\postgresql-42.2.12\\YouTubeAndroidPlayerApi.jar')
+    implementation 'com.google.firebase:firebase-database:19.3.0'
+    implementation 'com.firebaseui:firebase-ui:0.6.0'
 }

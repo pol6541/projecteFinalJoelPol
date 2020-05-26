@@ -39,7 +39,6 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
     SignInButton btnLogin;
     Button btnExit;
     EditText nomUsuari;
-    EditText contrasenya;
     GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
 
