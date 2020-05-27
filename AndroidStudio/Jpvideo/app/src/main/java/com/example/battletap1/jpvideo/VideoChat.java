@@ -111,13 +111,16 @@ public class VideoChat extends YouTubeBaseActivity {
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
-                // Set their text
                 System.out.println(model.getMessageId() + "             " + nameId);
                 System.out.println("==============================================");
                 if (model.getMessageId().equals(nameId)) {
+<<<<<<< HEAD
+=======
+                    System.out.println("?????????????????????????????????????????????????");
+                    // Set their text
+>>>>>>> 898a8ecb7075ae08fe4f40a6a9eb7b5f67cfc643
                     messageText.setText(model.getMessageText());
                     messageUser.setText(model.getMessageUser());
-
                     // Format the date before showing it
                     messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
                             model.getMessageTime()));

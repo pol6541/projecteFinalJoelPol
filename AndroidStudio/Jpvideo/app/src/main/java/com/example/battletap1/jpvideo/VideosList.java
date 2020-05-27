@@ -3,6 +3,7 @@ package com.example.battletap1.jpvideo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +27,8 @@ public class VideosList extends AppCompatActivity {
     EditText textLink;
     ListView videosList;
     private FirebaseListAdapter<DisplayList> adapter;
+    int i;
+    boolean cercarNom;
 
 
 
@@ -32,6 +36,7 @@ public class VideosList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
+
         videosList = (ListView)findViewById(R.id.videosList);
         displayList();
         ftb = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -74,20 +79,38 @@ public class VideosList extends AppCompatActivity {
                                 String link = textLink.getText().toString();
                                 String name = textName.getText().toString();
                                 System.out.println(link);
+                                i = 0;
+                                cercarNom = true;
+                                while (i < adapter.getCount() && cercarNom){
+                                    if (name.equals(adapter.getItem(i).getName())){
+                                        cercarNom = false;
+                                    }else{
+                                        i++;
+                                    }
+                                }
+                                if (cercarNom){
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("Sessions")
+                                            .push()
+                                            .setValue(new DisplayList(name, link,
+                                                    FirebaseAuth.getInstance()
+                                                            .getCurrentUser()
+                                                            .getDisplayName())
+                                            );
 
-                                FirebaseDatabase.getInstance()
-                                        .getReference("Sessions")
-                                        .push()
-                                        .setValue(new DisplayList(name, link,
-                                                FirebaseAuth.getInstance()
-                                                        .getCurrentUser()
-                                                        .getDisplayName())
-                                        );
+                                    Intent intent = new Intent(VideosList.this, VideoChat.class);
+                                    intent.putExtra("link", link);
+                                    intent.putExtra("nameId", name);
+                                    startActivity(intent);
+                                }else{
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Name already created!";
+                                    int duration = Toast.LENGTH_SHORT;
 
-                                Intent intent = new Intent(VideosList.this, VideoChat.class);
-                                intent.putExtra("link", link);
-                                intent.putExtra("nameId", name);
-                                startActivity(intent);
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                }
+
 
 
                             }
