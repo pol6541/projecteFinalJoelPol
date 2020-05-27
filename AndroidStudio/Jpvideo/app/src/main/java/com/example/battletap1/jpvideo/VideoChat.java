@@ -29,6 +29,7 @@ public class VideoChat extends YouTubeBaseActivity {
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer.OnInitializedListener onInitializedListener;
     String link;
+    String nameId;
     String linkReproduir;
 
     private FirebaseListAdapter<ChatMessage> adapter;
@@ -40,7 +41,7 @@ public class VideoChat extends YouTubeBaseActivity {
         setContentView(R.layout.activity_video_chat);
 
 
-
+        nameId = getIntent().getStringExtra("nameId");
         displayChatMessages();
 
         FloatingActionButton fab =
@@ -59,7 +60,8 @@ public class VideoChat extends YouTubeBaseActivity {
                         .setValue(new ChatMessage(input.getText().toString(),
                                 FirebaseAuth.getInstance()
                                         .getCurrentUser()
-                                        .getDisplayName())
+                                        .getDisplayName(),
+                                nameId)
                         );
 
                 // Clear the input
@@ -110,12 +112,16 @@ public class VideoChat extends YouTubeBaseActivity {
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
                 // Set their text
-                messageText.setText(model.getMessageText());
-                messageUser.setText(model.getMessageUser());
+                System.out.println(model.getMessageId() + "             " + nameId);
+                System.out.println("==============================================");
+                if (model.getMessageId() == nameId) {
+                    messageText.setText(model.getMessageText());
+                    messageUser.setText(model.getMessageUser());
 
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getMessageTime()));
+                    // Format the date before showing it
+                    messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                            model.getMessageTime()));
+                }
             }
         };
 

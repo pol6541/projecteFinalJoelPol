@@ -47,6 +47,7 @@ public class VideosList extends AppCompatActivity {
                 System.out.println(adapter.getItem(position).getName());
                 Intent intent = new Intent(VideosList.this, VideoChat.class);
                 intent.putExtra("link", adapter.getItem(position).getLink());
+                intent.putExtra("nameId", adapter.getItem(position).getName());
                 startActivity(intent);
             }
         });
@@ -85,6 +86,7 @@ public class VideosList extends AppCompatActivity {
 
                                 Intent intent = new Intent(VideosList.this, VideoChat.class);
                                 intent.putExtra("link", link);
+                                intent.putExtra("nameId", name);
                                 startActivity(intent);
 
 

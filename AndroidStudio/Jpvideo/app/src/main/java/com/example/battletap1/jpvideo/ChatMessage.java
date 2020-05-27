@@ -5,12 +5,13 @@ import java.util.Date;
 public class ChatMessage {
     private String messageText;
     private String messageUser;
+    private String messageId;
     private long messageTime;
 
-    public ChatMessage(String messageText, String messageUser) {
+    public ChatMessage(String messageText, String messageUser, String messageId) {
         this.messageText = messageText;
         this.messageUser = messageUser;
-
+        this.messageId = messageId;
         // Initialize to current time
         messageTime = new Date().getTime();
     }
@@ -41,5 +42,13 @@ public class ChatMessage {
 
     public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 }
