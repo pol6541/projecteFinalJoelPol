@@ -73,7 +73,11 @@ public class VideoChat extends YouTubeBaseActivity {
 
         //Agafem el link del dialeg i agafem nomes la part que ens interessa
         link = getIntent().getStringExtra("link");
-        linkReproduir = link.substring(link.lastIndexOf("/")+1);
+        if (link.contains("=")) {
+            linkReproduir = link.substring(link.lastIndexOf("=")+1);
+        } else {
+            linkReproduir = link.substring(link.lastIndexOf("/")+1);
+        }
 
         //Configurem el YoutubePlayer per poder reproduir el video
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);

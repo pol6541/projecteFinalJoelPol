@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class VideosList extends AppCompatActivity {
     FloatingActionButton ftb;
     EditText textName;
     EditText textLink;
+    ListView videosList;
     private FirebaseListAdapter<DisplayList> adapter;
 
 
@@ -30,6 +32,7 @@ public class VideosList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
+        videosList = (ListView)findViewById(R.id.videosList);
         displayList();
         ftb = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         ftb.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +41,15 @@ public class VideosList extends AppCompatActivity {
                 mostrarDialeg();
             }
         });
-
+        videosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println(adapter.getItem(position).getName());
+                Intent intent = new Intent(VideosList.this, VideoChat.class);
+                intent.putExtra("link", adapter.getItem(position).getLink());
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -92,7 +103,6 @@ public class VideosList extends AppCompatActivity {
     }
 
     private void displayList() {
-        ListView videosList = (ListView)findViewById(R.id.videosList);
 
         adapter = new FirebaseListAdapter<DisplayList>(this, DisplayList.class,
                 R.layout.layout_list, FirebaseDatabase.getInstance().getReference("Sessions")) {
