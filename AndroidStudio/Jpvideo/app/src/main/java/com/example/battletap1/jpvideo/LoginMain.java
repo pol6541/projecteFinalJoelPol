@@ -2,20 +2,15 @@ package com.example.battletap1.jpvideo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
@@ -24,21 +19,15 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.sql.ResultSet;
-import java.sql.SQLOutput;
-import java.sql.Statement;
-
 public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     SignInButton btnLogin;
     Button btnExit;
-    EditText nomUsuari;
     GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
 
@@ -51,11 +40,12 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
-
+        //Aquesta variable es per definir amb quin metode farem login a google.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        // Declarem la API de autentificació de google.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this , this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
@@ -68,13 +58,12 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         btnExit = findViewById(R.id.exitBtn);
         btnExit.setOnClickListener(this);
 
-        nomUsuari = findViewById(R.id.nomUsuari);
-
 
     }
 
     @Override
     public void onClick(View v) {
+        // Switch que comprova si es clica el botó de login o el boto de exit
         switch (v.getId()) {
             case R.id.loginBtn:
                 signIn();
@@ -85,16 +74,16 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         }
 
     }
-
+    // Aquest metode comença a fer login amb google.
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
+    // Comprova si el login ha resultat valid o invalid.
     public void onActivityResult (int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-
+        // En aquest cas, si requestCode es igual a RC_SING_IN podem continuar.
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -110,11 +99,12 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
 
         }
     }
-
+    // Aquest metode fa la comprovacio de credencials amb google.
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
+        // Guardem la ID de la conta de usuari.
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        // Aqui comprovem amb google si es correcte.
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -136,12 +126,12 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                     }
                 });
     }
-
+    // En cas de no poderse conectar mostrarem el contingut d'aquesta funció.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
-
+    // En el cas de apretar el boto de sortir, farem signOut de la conta de google.
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override

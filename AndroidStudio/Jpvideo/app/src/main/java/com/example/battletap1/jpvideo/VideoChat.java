@@ -1,20 +1,12 @@
 package com.example.battletap1.jpvideo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.media.MediaPlayer;
-import android.media.session.MediaController;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.VideoView;
-
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -23,7 +15,6 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-
 
 public class VideoChat extends YouTubeBaseActivity {
     YouTubePlayerView youTubePlayerView;
@@ -52,8 +43,8 @@ public class VideoChat extends YouTubeBaseActivity {
             public void onClick(View view) {
                 EditText input = (EditText)findViewById(R.id.input);
 
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
+                // LLegim l'input i fem push a una nova instancia
+                // de la classe ChatMessage a la base de dades Firebase.
                 FirebaseDatabase.getInstance()
                         .getReference("Missatges/" + nameId)
                         .push()
@@ -62,7 +53,7 @@ public class VideoChat extends YouTubeBaseActivity {
                                                     nameId)
                         );
 
-                // Clear the input
+                // Netejem l'input
                 input.setText("");
             }
         });
@@ -83,12 +74,14 @@ public class VideoChat extends YouTubeBaseActivity {
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
         onInitializedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
+            // En cas de poder carregar el video farem aquest metode.
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 System.out.println("SUCCESS----------------------------");
                 youTubePlayer.loadVideo(linkReproduir);
 
             }
             @Override
+            // En cas de haver-hi qualsevol error farem aquest altre.
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
                 System.out.println("FAIL---------------------------");
             }
@@ -104,20 +97,17 @@ public class VideoChat extends YouTubeBaseActivity {
                 R.layout.message, FirebaseDatabase.getInstance().getReference("Missatges/" + nameId)) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
-                // Get references to the views of message.xml
+                // Agafem les referencies del xml message.xml
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
-                System.out.println(model.getMessageId() + "             " + nameId);
-                System.out.println("==============================================");
                 if (model.getMessageId().equals(nameId)) {
 
-                    System.out.println("?????????????????????????????????????????????????");
-                    // Set their text
+                    // Fiquem el text dels altres.
                     messageText.setText(model.getMessageText());
                     messageUser.setText(model.getMessageUser());
-                    // Format the date before showing it
+                    // Formatem la data avans de mostrarla
                     messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
                             model.getMessageTime()));
                 }
