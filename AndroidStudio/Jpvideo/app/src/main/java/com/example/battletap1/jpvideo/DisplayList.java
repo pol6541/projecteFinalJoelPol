@@ -6,7 +6,7 @@ public class DisplayList {
     String name;
     String link;
     String auth;
-    Long temps;
+    long temps;
 
     public DisplayList(String name, String link, String auth) {
         this.name = name;

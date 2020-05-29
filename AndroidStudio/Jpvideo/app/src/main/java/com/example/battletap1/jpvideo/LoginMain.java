@@ -136,6 +136,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
+                finish();
                 System.exit(0);
             }
         });
