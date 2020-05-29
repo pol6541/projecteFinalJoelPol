@@ -68,10 +68,6 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         btnExit = findViewById(R.id.exitBtn);
         btnExit.setOnClickListener(this);
 
-
-
-
-
         nomUsuari = findViewById(R.id.nomUsuari);
 
 

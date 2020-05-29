@@ -1,5 +1,7 @@
 package com.example.battletap1.jpvideo;
 
+import android.widget.ImageView;
+
 public class DisplayList {
     String name;
     String link;

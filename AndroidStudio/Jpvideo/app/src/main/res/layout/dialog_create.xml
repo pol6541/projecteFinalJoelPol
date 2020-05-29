@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <ImageView
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#FFFFBB33"
+        android:background="#4FACF3"
         android:contentDescription="@string/app_name"
         android:scaleType="center"
-        android:src="@drawable/new_icon" />
+        android:src="@drawable/newsessio" />
 
     <EditText
         android:id="@+id/Name"
@@ -22,15 +22,16 @@
         android:layout_marginBottom="4dp"
         android:hint="Name"
         android:inputType="text" />
+
     <EditText
         android:id="@+id/Link"
-        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Link" />
+        android:hint="Link"
+        android:inputType="text" />
 
 </LinearLayout>

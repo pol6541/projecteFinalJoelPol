@@ -58,10 +58,8 @@ public class VideoChat extends YouTubeBaseActivity {
                         .getReference("Missatges/" + nameId)
                         .push()
                         .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName(),
-                                nameId)
+                                                    FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                                                    nameId)
                         );
 
                 // Clear the input
@@ -114,11 +112,9 @@ public class VideoChat extends YouTubeBaseActivity {
                 System.out.println(model.getMessageId() + "             " + nameId);
                 System.out.println("==============================================");
                 if (model.getMessageId().equals(nameId)) {
-<<<<<<< HEAD
-=======
+
                     System.out.println("?????????????????????????????????????????????????");
                     // Set their text
->>>>>>> 898a8ecb7075ae08fe4f40a6a9eb7b5f67cfc643
                     messageText.setText(model.getMessageText());
                     messageUser.setText(model.getMessageUser());
                     // Format the date before showing it
